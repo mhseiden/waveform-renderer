@@ -1,0 +1,103 @@
+* {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	cursor: default;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+body {
+	background: #EEE;
+	margin: 0px;
+	padding: 0px;
+}
+
+#waveform-container, .waveform-container {
+	position: relative;
+	width: 600px;
+	height: 170px;
+	margin: 0px auto;
+	padding: 0px;
+	display: block;
+	border: 1px solid #000;
+	background: #FFF;
+	box-shadow: 0px 0px 1px #666;
+}
+
+#selected-container, .selected-container {
+	display: block;
+	width: 600px;
+	height: 19px;
+	position: relative;
+	border-bottom: 1px solid #000;
+}
+
+#selected-bar, .selected-bar {
+	display: block;
+	width: 100%;
+	min-width: 0.5%;
+	height: 100%;
+	position: absolute;
+	background: rgba(255, 0, 0, 0.25);
+	top: 0px;
+	left: 0px;
+	cursor: pointer;
+}
+
+#canvas-container, .canvas-container {
+	display: block;
+	margin: 0px;
+	padding: 0px;
+	width: 579px;
+	height: 150px;
+	float: left;
+	border-right: 1px solid #000;
+}
+
+#control-container, .control-container {
+	display: block;
+	margin: 0px;
+	padding: 0px;
+	width: 20px;
+	height: 150px;
+	position: relative;
+	float: right;
+}
+
+.ctrl-box {
+	line-height: 20px;
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	left: 0px;
+	text-align: center;
+	font-weight: 200;
+	cursor: pointer;
+	color: #999;
+}
+
+.ctrl-box:hover {
+	color: #000;
+}
+
+#ctrl-in, .ctrl-in {
+	top: 0px;
+	/* Plus is annoying to center... */
+	line-height: 16px;
+}
+
+#ctrl-out, .ctrl-out {
+	bottom: 0px;
+}
+
+#ctrl-left, .ctrl-left {
+	top: 42px;
+}
+
+#ctrl-right, .ctrl-right {
+	bottom: 42px;
+}
+

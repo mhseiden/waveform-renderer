@@ -1,0 +1,81 @@
+<html>
+	<head>
+		<title>Waveform Rendering Demo</title>
+		<link rel="stylesheet" type="text/css" href="/css/styles.css"></link>
+		<script src="/js/waveform.js"></script>
+	</head>
+	<body>
+		<div id="waveform-container">
+			<div id="selected-container">
+				<div id="selected-bar"></div>
+			</div>
+		</div>
+
+		<script>
+			(function() {
+				var url = "http://upload.wikimedia.org/wikipedia/commons/b/be/Toccata_et_Fugue_BWV565.ogg";
+				waveform = new Waveform(document.getElementById("waveform-container"));
+				waveform.waveformFromMP3URL(url, function() {
+
+					var retrig = (function(interval) {
+						return {
+							on: function(fn) { interval = setInterval(fn, 100); }
+						, off: function() { clearInterval(interval); }
+						}
+					})();
+
+					document.getElementById("ctrl-in").addEventListener("mousedown", function(e) {
+						e.preventDefault();
+						waveform.zoomIn();
+						retrig.on(function() { waveform.zoomIn(); });
+					});
+
+					document.getElementById("ctrl-out").addEventListener("mousedown", function(e) {
+						e.preventDefault();
+						waveform.zoomOut();
+						retrig.on(function() { waveform.zoomOut(); });
+					});
+
+					document.getElementById("ctrl-left").addEventListener("mousedown", function(e) {
+						e.preventDefault();
+						waveform.panLeft();
+						retrig.on(function() { waveform.panLeft(); });
+					});
+
+					document.getElementById("ctrl-right").addEventListener("mousedown", function(e) {
+						e.preventDefault();
+						waveform.panRight();
+						retrig.on(function() { waveform.panRight(); });
+					});
+
+					document.getElementById("selected-bar").addEventListener("mousedown", function(e) {
+						e.preventDefault();
+						baseOffset = parseFloat(e.pageX);
+						baseX = parseFloat(this.style["left"].replace("px", ""));
+						priorX = baseX;
+
+						document.addEventListener("mousemove", mousemove);
+						document.addEventListener("mouseup", mouseup);
+
+						function mousemove(e) {
+							e.preventDefault();
+							waveform.pan((baseX + (e.pageX - baseOffset)) / 600);
+						}
+
+						function mouseup(e) {
+							e.preventDefault();
+							document.removeEventListener("mousemove", mousemove);
+							document.removeEventListener("mouseup", mouseup);
+						}
+					});
+
+					document.addEventListener("mouseup", function(e) {
+						e.preventDefault();
+						retrig.off();
+					});
+
+				})
+			})();
+		</script>
+	</body>
+</html>
